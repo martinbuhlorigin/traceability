@@ -557,6 +557,48 @@
     p { orphans: 3; widows: 3; }
   }
 
+
+  /* ── v2: side-by-side lots + shared process ── */
+  .lots-grid.two-up { grid-template-columns: 1fr 1fr; align-items: stretch; }
+  .lots-grid.three-up { grid-template-columns: repeat(3, 1fr); align-items: stretch; }
+  .lots-grid.three-up .lot-card { display: flex; flex-direction: column; }
+  .lots-grid.three-up .lot-card-body { grid-template-columns: 1fr; flex: 1; }
+  .lots-grid.three-up .lot-row:nth-child(odd) { border-right: none; }
+  .diff-grid.three-up { grid-template-columns: repeat(3, 1fr); }
+  .spectrum { margin: 0 0 18px; }
+  .spectrum-bar { height: 6px; border-radius: 6px; background: linear-gradient(90deg, #C5DDB8 0%, #9FD17C 50%, #2D4A35 100%); }
+  .spectrum-labels { display: flex; justify-content: space-between; font-size: 11px; color: #4A7A3E; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; margin-top: 6px; }
+  .story-box { background: #F2F9EE; border-left: 3px solid #4A7A3E; border-radius: 6px; padding: 14px 18px; font-size: 13px; color: #2C2C2A; margin: -4px 0 20px; line-height: 1.55; }
+  .lots-grid.two-up .lot-card { display: flex; flex-direction: column; }
+  .lots-grid.two-up .lot-card-body { grid-template-columns: 1fr; flex: 1; }
+  .lots-grid.two-up .lot-row:nth-child(odd) { border-right: none; }
+  .lot-card-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+  .lot-score { font-size: 11px; font-weight: 600; color: #2D4A35; background: #9FD17C; border-radius: 20px; padding: 3px 10px; white-space: nowrap; }
+  .lot-tagline { font-size: 12px; color: rgba(255,255,255,0.75); margin-top: 4px; }
+  .journey { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; margin: 4px 0 28px; border: 1px solid #E0EAE0; border-radius: 10px; overflow: hidden; }
+  .journey-step { padding: 16px 14px; border-right: 1px solid #E8F0E8; background: #fff; }
+  .journey-step:last-child { border-right: none; }
+  .journey-step.highlight { background: #F2F9EE; }
+  .journey-num { font-size: 10px; font-weight: 600; letter-spacing: 0.1em; color: #4A7A3E; text-transform: uppercase; margin-bottom: 6px; }
+  .journey-step h4 { font-size: 13px; font-weight: 500; color: #2C2C2A; margin-bottom: 4px; }
+  .journey-step p { font-size: 12px; color: #5F5E5A; margin: 0; line-height: 1.45; }
+  .diff-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 36px; }
+  .diff-card { border: 1px solid #E0EAE0; border-radius: 10px; padding: 18px 20px; background: #fff; }
+  .diff-card .diff-label { font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #4A7A3E; margin-bottom: 6px; }
+  .diff-card h4 { font-size: 15px; font-weight: 500; color: #2C2C2A; margin-bottom: 10px; }
+  .diff-card ul { margin: 0 0 12px 18px; padding: 0; }
+  .diff-card li { font-size: 13px; color: #5F5E5A; margin-bottom: 4px; line-height: 1.45; }
+  .diff-result { font-size: 12px; color: #2D4A35; background: #F2F9EE; border-radius: 6px; padding: 8px 10px; }
+  .section-intro { font-size: 13px; color: #5F5E5A; margin: -6px 0 16px; }
+  @media (max-width: 760px) {
+    .lots-grid.two-up, .lots-grid.three-up, .diff-grid, .diff-grid.three-up { grid-template-columns: 1fr; }
+    .journey { grid-template-columns: 1fr; }
+    .journey-step { border-right: none; border-bottom: 1px solid #E8F0E8; }
+    .journey-step:last-child { border-bottom: none; }
+  }
+  @media print {
+    .lot-card, .diff-card, .journey { break-inside: avoid; page-break-inside: avoid; }
+  }
 </style>
 </head>
 <body>
@@ -667,98 +709,169 @@
 <div class="page">
   <div class="section-label">Your coffee from this farm</div>
 
-  <div class="lots-grid">
+  <div class="story-box"><strong>One variety, one farm, one harvest, three processes.</strong> These three lots are all Maracaturra from La Picona. The only thing that changes is how the cherry is processed after picking, and that alone takes the cup from clean and bright to sweet and fruit-forward.</div>
 
-    <!-- LOT: Maracaturra Natural -->
+  <div class="spectrum">
+    <div class="spectrum-bar"></div>
+    <div class="spectrum-labels"><span>Clean &amp; bright</span><span>Sweet &amp; balanced</span><span>Fruity &amp; intense</span></div>
+  </div>
+
+  <div class="lots-grid three-up">
+
+    <!-- LOT: Maracaturra Washed -->
     <div class="lot-card">
       <div class="lot-card-header">
-        <div class="lot-process">Natural process</div>
-        <h3>Maracaturra</h3>
+        <div>
+          <div class="lot-process">Washed process</div>
+          <h3>Maracaturra</h3>
+          <div class="lot-tagline">Clean, bright and elegant</div>
+        </div>
       </div>
       <div class="lot-card-body">
         <div class="lot-row">
           <span class="lot-row-key">Variety</span>
-          <span class="lot-row-val">Maracaturra<br><span style="font-size:11px;color:#888;">(Maragogype × Caturra hybrid)</span></span>
+          <span class="lot-row-val">Maracaturra <span style="font-size:11px;color:#888;">(Maragogype × Caturra hybrid)</span></span>
         </div>
         <div class="lot-row">
-          <span class="lot-row-key">Process</span>
-          <span class="lot-row-val">Natural (whole cherry dried)</span>
+          <span class="lot-row-key">Flavor profile</span>
+          <div class="flavor-pills">
+            <span class="flavor-pill">Lemongrass</span>
+            <span class="flavor-pill">Red fruits</span>
+            <span class="flavor-pill">Cocoa</span>
+          </div>
+        </div>
+        <div class="lot-row" style="border-bottom:none;">
+          <span class="lot-row-key">Cup character</span>
+          <span class="lot-row-val">Medium body with a bright malic acidity and a velvety, sweet aftertaste. A clean, elegant expression of La Picona's Maracaturra.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- LOT: Maracaturra Honey -->
+    <div class="lot-card">
+      <div class="lot-card-header">
+        <div>
+          <div class="lot-process">Honey process</div>
+          <h3>Maracaturra</h3>
+          <div class="lot-tagline">Sweet, balanced and juicy</div>
+        </div>
+      </div>
+      <div class="lot-card-body">
+        <div class="lot-row">
+          <span class="lot-row-key">Variety</span>
+          <span class="lot-row-val">Maracaturra <span style="font-size:11px;color:#888;">(Maragogype × Caturra hybrid)</span></span>
         </div>
         <div class="lot-row">
-          <span class="lot-row-key">Pre-fermentation</span>
-          <span class="lot-row-val">48–72 h in tanks, spontaneous</span>
+          <span class="lot-row-key">Flavor profile</span>
+          <div class="flavor-pills">
+            <span class="flavor-pill">Apricot</span>
+            <span class="flavor-pill">Cocoa</span>
+            <span class="flavor-pill">Brown sugar</span>
+          </div>
+        </div>
+        <div class="lot-row" style="border-bottom:none;">
+          <span class="lot-row-key">Cup character</span>
+          <span class="lot-row-val">Medium body with an elegant acidity. Balanced, with a juicy aftertaste. The middle ground between the clarity of the washed and the fruit of the natural.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- LOT: Maracaturra Natural -->
+    <div class="lot-card">
+      <div class="lot-card-header">
+        <div>
+          <div class="lot-process">Natural process</div>
+          <h3>Maracaturra</h3>
+          <div class="lot-tagline">Fruit-forward, sweet and silky</div>
+        </div>
+      </div>
+      <div class="lot-card-body">
+        <div class="lot-row">
+          <span class="lot-row-key">Variety</span>
+          <span class="lot-row-val">Maracaturra <span style="font-size:11px;color:#888;">(Maragogype × Caturra hybrid)</span></span>
         </div>
         <div class="lot-row">
-          <span class="lot-row-key">Total drying time</span>
-          <span class="lot-row-val">28–32 days on raised beds</span>
-        </div>
-        <div class="lot-row">
-          <span class="lot-row-key">Resting</span>
-          <span class="lot-row-val">30 days post-drying, pre-milling</span>
-        </div>
-        <div class="lot-row">
-          <span class="lot-row-key">Target humidity</span>
-          <span class="lot-row-val">~12%</span>
-        </div>
-        <div class="lot-row full-width">
           <span class="lot-row-key">Flavor profile</span>
           <div class="flavor-pills">
             <span class="flavor-pill">Tropical fruit</span>
             <span class="flavor-pill">Juicy sweetness</span>
             <span class="flavor-pill">Silky texture</span>
-            <span class="flavor-pill">Structured body</span>
-            <span class="flavor-pill">Depth</span>
           </div>
         </div>
-        <div class="lot-row full-width" style="border-bottom:none;">
+        <div class="lot-row" style="border-bottom:none;">
           <span class="lot-row-key">Cup character</span>
-          <span class="lot-row-val">Vibrant fruit character, concentrated sweetness, and a silky mouthfeel that reflects both the richness of the volcanic soil and the slow, careful drying protocol.</span>
+          <span class="lot-row-val">Vibrant fruit, concentrated sweetness, a structured body and a silky mouthfeel, shaped by the volcanic soil and a slow, careful drying protocol.</span>
         </div>
       </div>
     </div>
 
   </div>
 
-  <!-- QC note -->
+  <!-- Shared journey -->
+  <div class="section-label">From cherry to export</div>
+  <p class="section-intro">All three lots follow the same path from the tree to the bag. Only step 3, the processing, sets them apart.</p>
 
-  <!-- Processing detail: Natural -->
-  <div class="section-label">Processing in detail — natural lot</div>
+  <div class="journey">
+    <div class="journey-step">
+      <div class="journey-num">Step 1</div>
+      <h4>Hand-picked</h4>
+      <p>Only fully ripe cherries, picked during the December to March harvest.</p>
+    </div>
+    <div class="journey-step">
+      <div class="journey-num">Step 2</div>
+      <h4>Floated and sorted</h4>
+      <p>Cherries are floated in clean water to remove impurities and defects.</p>
+    </div>
+    <div class="journey-step highlight">
+      <div class="journey-num">Step 3</div>
+      <h4>Processed</h4>
+      <p>Washed, honey or natural. See the comparison below.</p>
+    </div>
+    <div class="journey-step">
+      <div class="journey-num">Step 4</div>
+      <h4>Dried on raised beds</h4>
+      <p>On African raised beds at Cafetos de Segovia's dry mill, to ~12% humidity.</p>
+    </div>
+    <div class="journey-step">
+      <div class="journey-num">Step 5</div>
+      <h4>Rested and milled</h4>
+      <p>Rested before milling, then hulled, sorted and packed in GrainPro.</p>
+    </div>
+  </div>
 
-  <div class="process-steps">
-    <div class="process-step">
-      <div class="step-num">1</div>
-      <div class="step-content">
-        <h4>Selective hand-picking at peak ripeness</h4>
-        <p>Only fully ripe cherries are harvested to ensure maximum sugar content. Underripe, overripe, and defective fruit is removed during sorting.</p>
-      </div>
+  <!-- Where they differ -->
+  <div class="section-label">How the process shapes the cup</div>
+
+  <div class="diff-grid three-up">
+    <div class="diff-card">
+      <div class="diff-label">Washed</div>
+      <h4>The bean is separated from the fruit</h4>
+      <ul>
+        <li>Cherries are depulped</li>
+        <li>The beans ferment in tanks until the mucilage loosens</li>
+        <li>Washed with clean water before drying</li>
+      </ul>
+      <div class="diff-result">Result: clarity, bright acidity and a clean finish</div>
     </div>
-    <div class="process-step">
-      <div class="step-num">2</div>
-      <div class="step-content">
-        <h4>Floating and sorting</h4>
-        <p>Cherries are floated in clean water to eliminate impurities and any remaining defects before fermentation.</p>
-      </div>
+    <div class="diff-card">
+      <div class="diff-label">Honey</div>
+      <h4>The bean dries with part of the fruit</h4>
+      <ul>
+        <li>Cherries are depulped</li>
+        <li>Part of the sticky mucilage is left on the bean</li>
+        <li>Dried without washing</li>
+      </ul>
+      <div class="diff-result">Result: sweetness and body, with a balanced acidity</div>
     </div>
-    <div class="process-step">
-      <div class="step-num">3</div>
-      <div class="step-content">
-        <h4>Pre-drying fermentation: 48–72 hours</h4>
-        <p>Whole cherries rest in tanks for 48–72 hours before drying. This short controlled fermentation kick-starts sugar breakdown, building the fruit-forward sweetness and complexity that defines La Picona's natural lots. No additives used.</p>
-      </div>
-    </div>
-    <div class="process-step">
-      <div class="step-num">4</div>
-      <div class="step-content">
-        <h4>Drying on African raised beds (28–32 days)</h4>
-        <p><strong>Days 1–5</strong> (from ~45% humidity): full sun on raised beds at Cafetos de Segovia's dry mill. <strong>Remaining days</strong>: moved to shaded, well-ventilated areas. Cherries are turned every 30–60 minutes for uniform drying. Temperature and humidity monitored daily.</p>
-      </div>
-    </div>
-    <div class="process-step">
-      <div class="step-num">5</div>
-      <div class="step-content">
-        <h4>Resting — 30 days pre-milling</h4>
-        <p>Once the cherries reach ~12% humidity, the coffee rests for 30 days before milling. This resting period stabilizes the bean and allows the flavors to settle and integrate.</p>
-      </div>
+    <div class="diff-card">
+      <div class="diff-label">Natural</div>
+      <h4>The bean dries inside the whole cherry</h4>
+      <ul>
+        <li>48–72 h spontaneous pre-fermentation in tanks</li>
+        <li>28–32 days drying, turned every 30–60 minutes</li>
+        <li>30 days of rest before milling</li>
+      </ul>
+      <div class="diff-result">Result: fruit-forward sweetness, body and depth</div>
     </div>
   </div>
 </div>
